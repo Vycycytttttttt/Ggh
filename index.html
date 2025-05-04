@@ -1,153 +1,134 @@
-<!DOCTYPE html><html lang="ar" dir="rtl">
+<!-- index.html --><!DOCTYPE html><html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>حاسبة الدرجات</title>
+  <title>حاسبة الدرجات للابتدائية (Online & Offline)</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html, body { width: 100%; height: 100%; overflow: hidden; }
+    html, body { width:100%; height:100%; overflow:hidden; user-select: none; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #ece9e6, #ffffff);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      font-family:'Segoe UI',sans-serif;
+      background-color: #ffffff;
+      background-image: radial-gradient(#ddd 1px, transparent 1px);
+      background-size: 20px 20px;
+      display:flex; justify-content:center; align-items:center; text-align:center;
     }
     .container {
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%; max-width: 360px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-      padding: 20px;
+      position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+      width:90%; max-width:360px; background:rgba(255,255,255,0.9);
+      border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.1); padding:20px;
     }
-    h1 { font-size: 1.5rem; margin-bottom: 16px; color: #333; }
-    .menu, .section {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      align-items: center;
+    h1 { font-size:1.5rem; margin-bottom:16px; color:#333; }
+    .instruction-box {
+      width:100%; padding:12px; margin-bottom:16px;
+      border:2px solid #00ffff; border-radius:8px;
+      animation: neon 1.5s ease-in-out infinite alternate;
+      background: rgba(0,255,255,0.1);
+      text-align:center;
     }
+    .instruction-box h2 { font-weight:bold; margin-bottom:8px; color:#333; text-align:center; }
+    .instruction-box ol {
+      display: inline-block; list-style: none; padding: 0; margin: 0;
+    }
+    .instruction-box ol li {
+      display: inline; margin: 0 10px; white-space: nowrap; color: #333; font-size: 0.95rem;
+    }
+    @keyframes neon { from { box-shadow: 0 0 5px #00ffff; } to { box-shadow: 0 0 20px #00ffff; } }
+    .menu, .section { display:flex; flex-direction:column; gap:12px; align-items:center; }
     .menu button, .section button {
-      width: 100%;
-      padding: 12px;
-      font-size: 1rem;
-      color: #fff;
-      background: #007bff;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s ease;
+      width:100%; padding:12px; font-size:1rem; color:#fff;
+      background:#007bff; border:none; border-radius:8px; cursor:pointer;
+      transition:background 0.2s ease;
     }
-    .menu button:hover, .section button:hover { background: #0056b3; }
-    .section { display: none; }
-    .section.active { display: flex; }
+    .menu button:hover, .section button:hover { background:#0056b3; }
+    .section { display:none; }
+    .section.active { display:flex; }
     .section input {
-      width: 80%;
-      padding: 10px;
-      font-size: 1rem;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      width:80%; padding:10px; font-size:1rem; text-align:center;
+      border:1px solid #ccc; border-radius:6px;
     }
-    .result-box {
-      width: 100%;
-      padding: 12px;
-      margin-top: 12px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      color: #333;
+    .result-box { width:100%; padding:12px; margin-top:12px;
+      font-weight:bold; font-size:1.1rem; color:#333;
     }
-    .result-default { background: #f1f1f1; border-left: 4px solid #007bff; }
-    .result-red { background: #ffe5e5; border-left: 4px solid #e63946; color: #e63946; }
-    .result-green { background: #e0f7e9; border-left: 4px solid #2a9d8f; color: #2a9d8f; }
-    footer { margin-top: 16px; font-size: 0.85rem; color: #777; }
+    .result-default { background:#f1f1f1; border-left:4px solid #007bff; }
+    .result-red { background:#ffe5e5 !important; border-left:4px solid #e63946 !important;
+      color:#e63946;
+    }
+    .result-green { background:#e0f7e9 !important; border-left:4px solid #2a9d8f !important;
+      color:#2a9d8f;
+    }
+    footer { margin-top:16px; font-size:0.85rem; color:#777; }
   </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
   <div class="container">
     <div id="mainMenu" class="menu">
-      <h1>حاسبة الدرجات</h1>
+      <h1>حاسبة الدرجات للابتدائية</h1>
+      <div class="instruction-box">
+        <h2>وظيفة التطبيق</h2>
+        <ol>
+          <li>احتساب الدرجة النهائية بعد الجمع والقسمة</li>
+          <li>إجبار النصف ليكون درجة</li>
+        </ol>
+      </div>
       <button onclick="openSection('firstTerm')">معدل الفصل الأول</button>
       <button onclick="openSection('secondTerm')">معدل الفصل الثاني</button>
       <button onclick="openSection('annual')">السعي السنوي</button>
       <footer>Created by Ahmed Falah</footer>
-    </div><div id="firstTerm" class="section">
-  <h1>الفصل الأول</h1>
-  <input type="number" id="f1" placeholder="الشهر الأول" min="0" max="100">
-  <input type="number" id="f2" placeholder="الشهر الثاني" min="0" max="100">
-  <input type="number" id="f3" placeholder="الشهر الثالث" min="0" max="100">
-  <button onclick="calculate('first')">احسب الدرجة</button>
-  <div id="resFirst" class="result-box result-default"></div>
-  <button onclick="reset('first')">حذف</button>
-  <button onclick="goBack()">رجوع</button>
-</div>
-
-<div id="secondTerm" class="section">
-  <h1>الفصل الثاني</h1>
-  <input type="number" id="s1" placeholder="الشهر الأول" min="0" max="100">
-  <input type="number" id="s2" placeholder="الشهر الثاني" min="0" max="100">
-  <button onclick="calculate('second')">احسب الدرجة</button>
-  <div id="resSecond" class="result-box result-default"></div>
-  <button onclick="reset('second')">حذف</button>
-  <button onclick="goBack()">رجوع</button>
-</div>
-
-<div id="annual" class="section">
-  <h1>السعي السنوي</h1>
-  <input type="number" id="a1" placeholder="الفصل الأول" min="0" max="100">
-  <input type="number" id="a2" placeholder="نصف السنة" min="0" max="100">
-  <input type="number" id="a3" placeholder="الفصل الثاني" min="0" max="100">
-  <button onclick="calculate('annual')">احسب الدرجة</button>
-  <div id="resAnnual" class="result-box result-default"></div>
-  <button onclick="reset('annual')">حذف</button>
-  <button onclick="goBack()">رجوع</button>
-</div>
-
-  </div>  <script>
-    function openSection(id) {
-      document.getElementById('mainMenu').style.display = 'none';
-      document.getElementById(id).classList.add('active');
-    }
-    function goBack() {
-      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      document.getElementById('mainMenu').style.display = 'flex';
-    }
+    </div>
+    <div id="firstTerm" class="section">
+      <h1>الفصل الأول</h1>
+      <input type="number" id="f1" placeholder="الشهر الأول" min="0" max="100">
+      <input type="number" id="f2" placeholder="الشهر الثاني" min="0" max="100">
+      <input type="number" id="f3" placeholder="الشهر الثالث" min="0" max="100">
+      <button onclick="calculate('first')">احسب الدرجة</button>
+      <div id="resFirst" class="result-box result-default"></div>
+      <button onclick="reset('first')">حذف</button>
+      <button onclick="goBack()">رجوع</button>
+    </div>
+    <div id="secondTerm" class="section">
+      <h1>الفصل الثاني</h1>
+      <input type="number" id="s1" placeholder="الشهر الأول" min="0" max="100">
+      <input type="number" id="s2" placeholder="الشهر الثاني" min="0" max="100">
+      <button onclick="calculate('second')">احسب الدرجة</button>
+      <div id="resSecond" class="result-box result-default"></div>
+      <button onclick="reset('second')">حذف</button>
+      <button onclick="goBack()">رجوع</button>
+    </div>
+    <div id="annual" class="section">
+      <h1>السعي السنوي</h1>
+      <input type="number" id="a1" placeholder="الفصل الأول" min="0" max="100">
+      <input type="number" id="a2" placeholder="نصف السنة" min="0" max="100">
+      <input type="number" id="a3" placeholder="الفصل الثاني" min="0" max="100">
+      <button onclick="calculate('annual')">احسب الدرجة</button>
+      <div id="resAnnual" class="result-box result-default"></div>
+      <button onclick="reset('annual')">حذف</button>
+      <button onclick="goBack()">رجوع</button>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey)&&['c','C'].includes(e.key)) e.preventDefault(); });
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
+    function openSection(id) { document.getElementById('mainMenu').style.display='none'; document.getElementById(id).classList.add('active'); }
+    function goBack() { document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById('mainMenu').style.display='flex'; }
     function calculate(type) {
-      const ids = type === 'first' ? ['f1','f2','f3'] : type === 'second' ? ['s1','s2'] : ['a1','a2','a3'];
-      const resId = type === 'first' ? 'resFirst' : type === 'second' ? 'resSecond' : 'resAnnual';
-      let sum = 0;
+      const ids = type==='first'?['f1','f2','f3']: type==='second'?['s1','s2']: ['a1','a2','a3'];
+      const resId = type==='first'?'resFirst': type==='second'?'resSecond': 'resAnnual';
+      let sum=0, msg='';
       for (let id of ids) {
-        const val = parseFloat(document.getElementById(id).value);
-        if (isNaN(val) || val < 0 || val > 100) {
-          document.getElementById(resId).textContent = 'قيمة غير صحيحة';
-          document.getElementById(resId).className = 'result-box result-red';
-          return;
-        }
-        sum += val;
+        let v = parseFloat(document.getElementById(id).value);
+        if (isNaN(v) || v<0 || v>100) { msg='قيمة غير صحيحة'; break; }
+        sum += v;
       }
-      let avg = sum / ids.length;
-      let rounded = Math.round(avg);
       const box = document.getElementById(resId);
-      box.textContent = `الدرجة النهائية: ${rounded}`;
-      if ([47,48,49].includes(rounded)) {
-        box.className = 'result-box result-red';
-      } else if (rounded >= 90) {
-        box.className = 'result-box result-green';
-      } else {
-        box.className = 'result-box result-default';
-      }
+      if (msg) { box.textContent=msg; box.className='result-box result-red'; return; }
+      let avg = Math.round(sum/ids.length);
+      box.textContent = `الدرجة النهائية: ${avg}`;
+      if (avg <= 29 || [47,48,49].includes(avg)) box.className='result-box result-red';
+      else if (avg >= 90) box.className='result-box result-green';
+      else box.className='result-box result-default';
     }
-    function reset(type) {
-      const ids = type === 'first' ? ['f1','f2','f3'] : type === 'second' ? ['s1','s2'] : ['a1','a2','a3'];
-      const resId = type === 'first' ? 'resFirst' : type === 'second' ? 'resSecond' : 'resAnnual';
-      ids.forEach(id => document.getElementById(id).value = '');
-      const box = document.getElementById(resId);
-      box.textContent = '';
-      box.className = 'result-box result-default';
-    }
-  </script></body>
+    function reset(type) { const ids = type==='first'?['f1','f2','f3']: type==='second'?['s1','s2']: ['a1','a2','a3']; const resId = type==='first'?'resFirst': type==='second'?'resSecond': 'resAnnual'; ids.forEach(id=>document.getElementById(id).value=''); const box=document.getElementById(resId); box.textContent=''; box.className='result-box result-default'; }
+  </script>
+</body>
 </html>
