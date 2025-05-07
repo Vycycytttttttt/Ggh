@@ -1,4 +1,5 @@
-<!-- index.html --><!DOCTYPE html><html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -74,7 +75,7 @@
       <button onclick="openSection('firstTerm')">معدل الفصل الأول</button>
       <button onclick="openSection('secondTerm')">معدل الفصل الثاني</button>
       <button onclick="openSection('annual')">السعي السنوي</button>
-      <footer>Created by Ahmed Falah</footer>
+      <footer>المصمم : احمد فلاح عريبي</footer>
     </div>
     <div id="firstTerm" class="section">
       <h1>الفصل الأول</h1>
@@ -107,6 +108,7 @@
     </div>
   </div>
   <script>
+    // لتمكين التشغيل دون اتصال، تأكد من إعداد 'sw.js' لتخزين هذا الملف في ذاكرة التخزين المؤقت
     document.addEventListener('keydown', e => { if ((e.ctrlKey||e.metaKey)&&['c','C'].includes(e.key)) e.preventDefault(); });
     if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
     function openSection(id) { document.getElementById('mainMenu').style.display='none'; document.getElementById(id).classList.add('active'); }
@@ -128,7 +130,14 @@
       else if (avg >= 90) box.className='result-box result-green';
       else box.className='result-box result-default';
     }
-    function reset(type) { const ids = type==='first'?['f1','f2','f3']: type==='second'?['s1','s2']: ['a1','a2','a3']; const resId = type==='first'?'resFirst': type==='second'?'resSecond': 'resAnnual'; ids.forEach(id=>document.getElementById(id).value=''); const box=document.getElementById(resId); box.textContent=''; box.className='result-box result-default'; }
+    function reset(type) { 
+      const ids = type==='first'?['f1','f2','f3']: type==='second'?['s1','s2']: ['a1','a2','a3']; 
+      const resId = type==='first'?'resFirst': type==='second'?'resSecond': 'resAnnual'; 
+      ids.forEach(id=>document.getElementById(id).value=''); 
+      const box=document.getElementById(resId); 
+      box.textContent=''; 
+      box.className='result-box result-default'; 
+    }
   </script>
 </body>
 </html>
