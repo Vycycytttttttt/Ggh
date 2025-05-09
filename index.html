@@ -21,7 +21,7 @@
     }
     h1 { font-size:1.5rem; margin-bottom:16px; color:#333; }
     .instruction-box {
-      hindsight:100%; padding:12px; margin-bottom:16px;
+      width:100%; padding:12px; margin-bottom:16px;
       border:2px solid #00008B; border-radius:8px;
       animation:neon 1.5s ease-in-out infinite alternate;
       background:rgba(0,0,139,0.05);
@@ -71,7 +71,7 @@
     </div>
     <!-- Primary Menu -->
     <div id="primaryMenu" class="menu" style="display:none;">
-      <h1>المرحلة الابتدائية</h1>
+      <h1>مرحلة ابتدائية</h1>
       <button onclick="openSection('firstTerm')">معدل الفصل الأول</button>
       <button onclick="openSection('secondTerm')">معدل الفصل الثاني</button>
       <button onclick="openSection('annual')">السعي السنوي</button>
@@ -80,7 +80,7 @@
     </div>
     <!-- Middle Menu -->
     <div id="middleMenu" class="menu" style="display:none;">
-      <h1>المرحلة المتوسطة/إلاعدادية</h1>
+      <h1>مرحلة متوسطة/إعدادية</h1>
       <button onclick="openSection('mFirstTerm')">معدل الفصل الأول</button>
       <button onclick="openSection('mSecondTerm')">معدل الفصل الثاني</button>
       <button onclick="openSection('mAnnual')">السعي السنوي</button>
@@ -90,9 +90,9 @@
     <!-- Primary Sections -->
     <div id="firstTerm" class="section">
       <h1>الفصل الأول</h1>
-      <input type="number" id="f1" placeholder="الشهر الأول" min="0" max="100">
-      <input type="number" id="f2" placeholder="الشهر الثاني" min="0" max="100">
-      <input type="number" id="f3" placeholder="الشهر الثالث" min="0" max="100">
+      <input type="number" id="f1" placeholder="الشهر الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="f2" placeholder="الشهر الثاني" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="f3" placeholder="الشهر الثالث" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('primary-first')">احسب الدرجة</button>
       <div id="resFirst" class="result-box result-default"></div>
       <button onclick="reset('primary-first')">حذف</button>
@@ -100,8 +100,8 @@
     </div>
     <div id="secondTerm" class="section">
       <h1>الفصل الثاني</h1>
-      <input type="number" id="s1" placeholder="الشهر الأول" min="0" max="100">
-      <input type="number" id="s2" placeholder="الشهر الثاني" min="0" max="100">
+      <input type="number" id="s1" placeholder="الشهر الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="s2" placeholder="الشهر الثاني" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('primary-second')">احسب الدرجة</button>
       <div id="resSecond" class="result-box result-default"></div>
       <button onclick="reset('primary-second')">حذف</button>
@@ -109,9 +109,9 @@
     </div>
     <div id="annual" class="section">
       <h1>السعي السنوي</h1>
-      <input type="number" id="a1" placeholder="الفصل الأول" min="0" max="100">
-      <input type="number" id="a2" placeholder="نصف السنة" min="0" max="100">
-      <input type="number" id="a3" placeholder="الفصل الثاني" min="0" max="100">
+      <input type="number" id="a1" placeholder="الفصل الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="a2" placeholder="نصف السنة" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="a3" placeholder="الفصل الثاني" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('primary-annual')">احسب الدرجة</button>
       <div id="resAnnual" class="result-box result-default"></div>
       <button onclick="reset('primary-annual')">حذف</button>
@@ -120,17 +120,17 @@
     <!-- Middle Sections -->
     <div id="mFirstTerm" class="section green">
       <h1>الفصل الأول</h1>
-      <input type="number" id="mf1" placeholder="الشهر الأول" min="0" max="100">
-      <input type="number" id="mf2" placeholder="الشهر الثاني" min="0" max="100">
+      <input type="number" id="mf1" placeholder="الشهر الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="mf2" placeholder="الشهر الثاني" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('middle-first')">احسب الدرجة</button>
       <div id="mrsFirst" class="result-box result-default"></div>
       <button onclick="reset('middle-first')">حذف</button>
       <button onclick="goBackToMiddle()">رجوع</button>
     </div>
     <div id="mSecondTerm" class="section green">
-      <h1>الفصل  الثاني</h1>
-      <input type="number" id="ms1" placeholder="الشهر الأول" min="0" max="100">
-      <input type="number" id="ms2" placeholder="الشهر الثاني" min="0" max="100">
+      <h1>الفصل الثاني</h1>
+      <input type="number" id="ms1" placeholder="الشهر الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="ms2" placeholder="الشهر الثاني" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('middle-second')">احسب الدرجة</button>
       <div id="mrsSecond" class="result-box result-default"></div>
       <button onclick="reset('middle-second')">حذف</button>
@@ -138,9 +138,9 @@
     </div>
     <div id="mAnnual" class="section green">
       <h1>السعي السنوي</h1>
-      <input type="number" id="ma1" placeholder="الفصل الأول" min="0" max="100">
-      <input type="number" id="ma2" placeholder="نصف السنة" min="0" max="100">
-      <input type="number" id="ma3" placeholder="الفصل الثاني" min="0" max="100">
+      <input type="number" id="ma1" placeholder="الفصل الأول" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="ma2" placeholder="نصف السنة" min="0" max="100" oninput="restrictInput(this)">
+      <input type="number" id="ma3" placeholder="الفصل الثاني" min="0" max="100" oninput="restrictInput(this)">
       <button onclick="calculate('middle-annual')">احسب الدرجة</button>
       <div id="mrsAnnual" class="result-box result-default"></div>
       <button onclick="reset('middle-annual')">حذف</button>
@@ -170,6 +170,25 @@
     function goBackToMiddle() {
       document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
       document.getElementById('middleMenu').style.display='flex';
+    }
+    function restrictInput(input) {
+      let value = input.value;
+      // Remove non-digit characters
+      value = value.replace(/\D/g, '');
+      // Limit to 3 digits and cap at 100
+      if (value.length > 3) {
+        value = value.slice(0, 3);
+      }
+      let numValue = parseInt(value);
+      if (numValue > 100) {
+        input.value = '100';
+        return; // Freeze further input by exiting
+      }
+      if (value.length === 3 && numValue <= 100) {
+        input.value = value; // Allow only up to 3 digits if valid
+        return;
+      }
+      input.value = value; // Update input with valid value
     }
     function calculate(type) {
       let ids,resId;
